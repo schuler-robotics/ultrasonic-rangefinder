@@ -2,11 +2,12 @@ Ultrasonic Rangefinder
 
 Motivation 
 ----------
-A trend in the development of electromechanical-software systems is to build prototypes using low cost digital microcontrollers in place of multiple single purpose integrated circuits.  This project shows by example how the functionality of these systems may be increased, and development time, cost, and complexity reduced, by augmenting microcontrollers with simple analog circuits.  The microcontroller in this design is a Raspberry Pi Pico.
+A trend in the development of electromechanical-software systems is building prototypes from low cost digital microcontrollers in place of multiple single purpose integrated circuits.  Functionality of these systems may be increased, and development time, cost, and complexity reduced, by augmenting microcontrollers with simple analog circuits.  The microcontroller in this design is a Raspberry Pi Pico, and the application is an ultrasonic distance rangefinder.
 
-A second-- more personal-- motivation is the author's desire to build a backyard-scale positioning system to control an antonymous lawn mower.  There are downsides to having your mowers children grow up and move out.
+A second-- more personal-- motivation is the author's desire to build a backyard-scale positioning system to control an autonomous lawn mower.  There are downsides to having your ~~mowers~~ children grow up and move out.
 
-Figure (1) shows an analog inductive switcher (boost converter), minus the Pico used for clocking, using just 4 devices and 160 mm^2 of board space.
+Figure (1) shows an analog inductive switcher (boost converter), minus the Pico for clocking, using just a transistor, diode, capacitor, and a hand wound inductor.
+
 
 <p float="left">
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig01-tx-01-sw-03.jpg" width="300" />
@@ -18,9 +19,14 @@ Figure (1) Analog Boost Converter
 
 System Description
 ------------------
-The system under consideration is an ultrasonic (40KHz) transmitter-receiver pair, configured to omnidirectionally measure distance.  The design has working diameter greater than 32 ft(1), and sub-inch accuracy.
+The system under consideration is an ultrasonic (40KHz) transmitter-receiver pair, configured to omnidirectionally measure distance.  The design has a working diameter greater than 32 ft (1), and sub-inch accuracy.
 
-Breadboard prototypes of the transmitter-receiver pair are illustrated in Figure (2), and a short demonstration video may be viewed at ‘https://youtu.be/8H4MsyW-lHo’
+Breadboard prototypes of the transmitter-receiver pair are illustrated in Figure (2), and a short demonstration video is linked to the image below.
+
+<p align="center">
+<a href="https://youtu.be/8H4MsyW-lHo" title="Video demonstration"><img src="https://img.youtube.com/vi/8H4MsyW-lHo/maxresdefault.jpg" width="350px"/></a>
+</p>
+
 
 <p float="left">
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig02-ultra-tx-rx-01.jpg" width="500" />
@@ -30,6 +36,8 @@ Figure (2) Ultrasonic Rangefinder Prototype
 <br />
 
 The transmitter includes an inductive switcher, clocked by the Pico PWM (pulse width modulator), to generate 20V from a 5V battery.  The 20V source powers a level-shifter and high voltage driver, generating a 40V peak-to-peak pulse train.  The high voltage pulses are fed to parallel piezo transducers (speakers) coupled to a 3D printed reflector to spread the signal uniformly in all lateral directions.
+
+The output of the boost converter is voltage clamped to 20V by the level-shifter transistors.  With a distance update rate of hundreds of milliseconds, the heat generated to power a 20 microsecond ultrasound pulse is insignificant.  A heat sink may be added to the switcher transistor to accommodate single digit millisecond distance update rates.
 
 The schematic and simulation results of the transmitter are shown in Figure (3). The resources inside the dashed lines represent the GPIO (general purpose input/output) signals, including pin models, that physically reside on the Pico microcontroller.
 
@@ -53,13 +61,13 @@ Figure (4) Receiver Schematic and Simulation Results
 <br />
 
 
-Five LEDs on the receiver board provide visual feedback during operation.  Four LEDs are grouped linearly to provide a binary estimate (1 ft resolution) of the measured distance, with the green LED indicating the LSB (least significant bit).  One additional red led provides a 'signal lost' bit which is illuminated when the transmitter out of range or obstructed.
+Five LEDs on the receiver board provide visual feedback during operation.  Four LEDs are grouped linearly to provide a binary estimate (1 ft resolution) of the measured distance, with the green LED indicating the LSB (least significant bit).  One additional red led provides a 'signal lost' bit which is illuminated when the transmitter is out of range or obstructed.
 
 Distance Measurement
 --------------------
 Sound waves in room temperature air travel at approximately 1ft/millisecond.  The precise value is strongly dependent on temperature, and weakly dependent on frequency and air composition (e.g. humidity).
 
-The time of flight for a signal traveling at 1ft per second is well within the measurement range of the Pico's 1us resolution timers.  Flight time from transmitter to receiver is converted to distance by the equation distance = velocity * time.  The precise velocity of the signal is determined by the system during a startup calibration procedure.  If the system is initialized (turned on) at a known distance, say 1 ft, the flight time for the first received pulse may be used to calculate the signal velocity by solving the distance equation for time.  The four LEDs providing binary distance flash in unison once the system is calibrated and ready to measure arbitrary distances. Figure (5) shows the approximate 1ft/ms relationship between the orange transmitted pulse and the magenta received pulse.
+The time of flight for a signal traveling at 1ft per second is well within the measurement range of the Pico's 1us resolution timers.  Flight time from transmitter to receiver is converted to distance by the equation distance = velocity * time.  The precise velocity of the signal is determined by the system during a startup calibration procedure.  If the system is initialized (turned on) at a known distance, say 1 ft, the flight time for the first received pulse may be used to calculate the signal velocity by solving the distance equation for time.  The four LEDs, indicating distance in binary, flash in unison once the system is calibrated and ready to measure arbitrary distances. Figure (5) shows the approximate 1ft/ms relationship between the orange transmitted pulse and the magenta received pulse.
 
 <p float="left">
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig05-rx-02-1ft-per-ms.jpg" width="600" />
@@ -68,7 +76,7 @@ Figure (5) Transmit and Receive Pulses Timing at 1ft
 <br />
 <br />
 
-Another non-ideality which must be accounted for is clock frequency skew between the transmitter and receiver Picos.  Figure (6) shows an approximately constant skew of 18us per pulse between the transmitter and recevier clocks.  This skew depends on environmental factors, such as process variation of the Picos, battery voltage, and temperature.  Similar to the velocity calibration, this skew may be auto-compensated at startup by measuring the skew of successive pulses.
+Another non-ideality which must be accounted for is clock frequency skew between the transmitter and receiver Picos.  Figure (6) shows an approximately constant skew of 18us per pulse between the transmitter and receivier clocks.  This skew depends on environmental factors, such as process variation of the Picos, battery voltage, and temperature.  Similar to the velocity calibration, this skew may be auto-compensated at startup by measuring the skew of successive pulses.
 
 <p float="left">
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig06-tx01-rx04-timing-skew.jpg" width="500" />
@@ -77,7 +85,7 @@ Figure (6) Frequency Skew between Transmitter and Receiver
 <br />
 <br />
 
-The signal intensity of sound waves, including ultrasound, is inversely proportional to the square of distance between transmission and reception.  The working distance of the system depends on the ability of the receiver to reliably resolve a valid pulse.  In addition to signal intensity, the line of sight angle between transmitter and receiver contributes to working distance.  Figure (7) shows the distance-intensity relationship between transmitter and receiver.  In this example, the omnidirectional reflector was removed to give a sense of intensity variation due to line of sight angle.  The intensity variation of the three 18ft pulses is due to manually 'aiming' the receiver and transmitter.  All of the pulses in Figure (7) were similarity manually aimed. Although the sensitivity to angle is reduced with the transmitter reflector in place, the working distance is reduced by roughly a factor of 2 due to absorption and spreading.
+The signal intensity of sound waves, including ultrasound, is inversely proportional to the square of distance between transmission and reception.  The working distance of the system depends on the ability of the receiver to reliably resolve a valid pulse.  In addition to signal intensity, the line of sight angle between transmitter and receiver contributes to working distance.  Figure (7) shows the distance-intensity relationship between transmitter and receiver.  In this example, the omnidirectional reflector was removed to give a sense of intensity variation due to line of sight angle.  The intensity variation of the three 18ft pulses is due to manually 'aiming' the receiver and transmitter.  All of the pulses in Figure (7) were manually aimed. Although the sensitivity to angle is reduced with the transmitter reflector in place, the working distance is reduced by roughly a factor of 2 due to absorption and spreading.
 
 <p float="left">
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig07-pico-ux-tx-01-rx-04-dist-exp-02.jpg" width="500" />
@@ -88,14 +96,14 @@ Figure (7) Received Pulses vs Distance
 
 Cost
 ----
-The single unit retail cost of the the Pico is 4USD.  The 10 unit cost of the TCT-40 piezo transducers are 0.7USD per element.  The remaining components used for this project were re-purposed from obsolete boards, or easily fabricated (e.g. the 32uH hand wound inductor).  The transmitter reflector and piezo transducer mount was 3D printed on a Monoprice Voxel 3D printer (350USD, 0.4mm nozzle diameter.)  Circuit simulations were accomplished using the freely available LTspice simulator, and mechanical models were generated on open source Freecad software.
+The single unit retail cost of the Pico is 4USD.  The 10 unit cost of the TCT-40 piezo transducers are 0.7USD per element.  The remaining components used for this project were re-purposed from obsolete boards, or easily fabricated (e.g. the 32uH hand wound inductor).  The transmitter reflector and piezo transducer mount was 3D printed on a Monoprice Voxel 3D printer (350USD, 0.4mm nozzle diameter.)  Circuit simulations were accomplished using the freely available LTspice simulator, and mechanical models were generated on open source Freecad software.
 
 Final Thoughts
 --------------
 
 The project as depicted here is used to generate a single line of sight distance measurement.  Multiple methods exist to enhance this into full Cartesian positioning.  One such method is coupling this rangefinder with a dead reckoning device, such as a silicon accelerometer.  Alternatively, two additional receive paths may be added (the Pico has 3 ADC channels) for triangulation navigation.
 
-The software controlling the boards described above was developed in C/C++, using the well documented Pico SDK (software development kit). Details of the controlling software design was excluded from this write up.  I plan to cover the ultrasonic rangefinder software in a follow on write up.
+The software controlling the RX/TX pair is written in C/C++, using the well documented Pico SDK (software development kit). 
 
 Thank you for taking the time to read this design note.  I welcome your questions and feedback.
 
