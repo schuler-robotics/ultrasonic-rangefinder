@@ -21,17 +21,12 @@ System Description
 ------------------
 The system under consideration is an ultrasonic (40KHz) transmitter-receiver pair, configured to omnidirectionally measure distance.  The design has a working diameter greater than 32 ft (1), and sub-inch accuracy.
 
-Breadboard prototypes of the transmitter-receiver pair are illustrated in Figure (2), and a short demonstration video is linked to the image below.
+Breadboard prototypes of the transmitter-receiver pair are illustrated in Figure (2), and a short demonstration video is linked to the image.
 
 <p align="center">
-<a href="https://youtu.be/8H4MsyW-lHo" title="Video demonstration"><img src="https://img.youtube.com/vi/8H4MsyW-lHo/maxresdefault.jpg" width="350px"/></a>
+<a href="https://youtu.be/8H4MsyW-lHo"<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig02-ultra-tx-rx-01.jpg" width="500" /></a>
 </p>
-
-
-<p float="left">
-<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig02-ultra-tx-rx-01.jpg" width="500" />
-</p>
-Figure (2) Ultrasonic Rangefinder Prototype
+Figure (2) Ultrasonic Rangefinder Prototype; Click image for video demonstration
 <br />
 <br />
 
