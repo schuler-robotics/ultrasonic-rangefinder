@@ -100,7 +100,7 @@ The project as depicted here is used to generate a single line of sight distance
 
 The software controlling the RX/TX pair is written in C/C++, using the well documented Pico SDK (software development kit). 
 
-Thank you for taking the time to read this design note.  I welcome your questions and feedback.
+Thank you for your time.  I welcome your questions and feedback.
 
 <pre>
 Ray Schuler
