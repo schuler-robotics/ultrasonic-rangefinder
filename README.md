@@ -24,7 +24,7 @@ The system under consideration is an ultrasonic (40KHz) transmitter-receiver pai
 Breadboard prototypes of the transmitter-receiver pair are illustrated in Figure (2), and a short demonstration video is linked to the image.
 
 <p align="center">
-<a href="https://youtu.be/8H4MsyW-lHo"<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig02-ultra-tx-rx-01.jpg" width="500" /></a>
+<a href="https://youtu.be/8H4MsyW-lHo" title="Video demonstration"><img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig02-ultra-tx-rx-01.jpg" width="500"/></a>
 </p>
 Figure (2) Ultrasonic Rangefinder Prototype; Click image for video demonstration
 <br />
