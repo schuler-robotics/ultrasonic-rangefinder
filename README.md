@@ -1,10 +1,8 @@
 Ultrasonic Rangefinder
+----------------------
+A trend in the development of electromechanical-software systems is to build prototypes from low cost digital microcontrollers instead of multiple single purpose integrated circuits.  This project shows by example how functionality of low cost microcontrollers may be increased, while development time, cost, and complexity reduced, by augmentaition with simple analog circuits.  The microcontroller in this design is a Raspberry Pi Pico, and the application is an ultrasonic distance rangefinder.
 
-Motivation 
-----------
-A trend in the development of electromechanical-software systems is building prototypes from low cost digital microcontrollers in place of multiple single purpose integrated circuits.  Functionality of these systems may be increased, and development time, cost, and complexity reduced, by augmenting microcontrollers with simple analog circuits.  The microcontroller in this design is a Raspberry Pi Pico, and the application is an ultrasonic distance rangefinder.
-
-A second-- more personal-- motivation is the author's desire to build a backyard-scale positioning system to control an autonomous lawn mower.  There are downsides to having your ~~mowers~~ children grow up and move out.
+A second motivation is the author's desire to build a backyard-scale positioning system to control an autonomous lawn mower.  There are downsides to having your ~~mowers~~ children grow up and move out.
 
 Figure (1) shows an analog inductive switcher (boost converter), minus the Pico for clocking, using just a transistor, diode, capacitor, and a hand wound inductor.
 
@@ -32,7 +30,7 @@ Figure (2) Ultrasonic Rangefinder Prototype; Click image for video demonstration
 
 The transmitter includes an inductive switcher, clocked by the Pico PWM (pulse width modulator), to generate 20V from a 5V battery.  The 20V source powers a level-shifter and high voltage driver, generating a 40V peak-to-peak pulse train.  The high voltage pulses are fed to parallel piezo transducers (speakers) coupled to a 3D printed reflector to spread the signal uniformly in all lateral directions.
 
-The output of the boost converter is voltage clamped to 20V by the level-shifter transistors.  With a distance update rate of hundreds of milliseconds, the heat generated to power a 20 microsecond ultrasound pulse is insignificant.  A heat sink may be added to the switcher transistor to accommodate single digit millisecond distance update rates.
+The output of the boost converter is determined by the PWM duty cycle and voltage clamped to 20V by the level-shifter transistors.  With a distance update rate of hundreds of milliseconds, the heat generated to power a 20 microsecond ultrasound pulse is insignificant.  A heat sink may be added to the switcher transistor to accommodate single digit millisecond distance update rates.  The inductor and capacitor values are selected to support the required output current and voltage ripple.  
 
 The schematic and simulation results of the transmitter are shown in Figure (3). The resources inside the dashed lines represent the GPIO (general purpose input/output) signals, including pin models, that physically reside on the Pico microcontroller.
 
@@ -95,10 +93,14 @@ The single unit retail cost of the Pico is 4USD.  The 10 unit cost of the TCT-40
 
 Final Thoughts
 --------------
+The Ultrasonic-rangefinder project depicted here affects a single line of sight distance measurement.  Multiple methods exist to enhance this into full Cartesian positioning.  One such method is coupling this rangefinder with a dead reckoning device, such as a silicon accelerometer.  Alternatively, two additional receive paths may be added (the Pico has 3 ADC channels) for triangulation navigation.
 
-The project as depicted here is used to generate a single line of sight distance measurement.  Multiple methods exist to enhance this into full Cartesian positioning.  One such method is coupling this rangefinder with a dead reckoning device, such as a silicon accelerometer.  Alternatively, two additional receive paths may be added (the Pico has 3 ADC channels) for triangulation navigation.
-
-The software controlling the RX/TX pair is written in C/C++, using the well documented Pico SDK (software development kit). 
+Logistics
+---------
+The software controlling the RX/TX pair is written in C/C++, using the well documented Pico SDK (software development kit). Source code directory descriptions are as follows:
+- rcs-tx01-02 - Transmitter Pico firmware
+- rcs-rx04-03 - Receiver Pico firmware
+- rcs-common  - Common Pico utility functions
 
 Thank you for your time.  I welcome your questions and feedback.
 
@@ -107,4 +109,4 @@ Ray Schuler
 schuler at usa.com
 </pre>
 
-(1) At the time of this writing, imperial units are widely used for lawn mower cutting diameters and lawn dimensions-- inches and ft^2, respectively.  Other distances will be given in MKS units, e.g. mm^2, as appropriate.  To paraphrase Andy Weir in his scifi book "Hail Mary", sometimes it's hard being an American scientist.
+(1) At the time of this writing, imperial units are widely used in the USA for lawn mower cutting diameters and lawn dimensions-- inches and ft^2, respectively.  Other distances will be given in MKS units, e.g. mm^2, as appropriate.  To paraphrase Andy Weir in his scifi book "Hail Mary", sometimes it's hard being an American scientist.
