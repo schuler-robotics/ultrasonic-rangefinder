@@ -109,4 +109,11 @@ Ray Schuler
 schuler at usa.com
 </pre>
 
+<p float="left">
+<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-A-vangoh-20220503.jpg" width="800" />
+</p>
+The ultrasonic rangefinder under discussion will eventually accompany this 3D printed robot lawn mower chasis.
+<br />
+<br />
+
 (1) At the time of this writing, imperial units are widely used in the USA for lawn mower cutting diameters and lawn dimensions-- inches and ft^2, respectively.  Other distances will be given in MKS units, e.g. mm^2, as appropriate.  To paraphrase Andy Weir in his scifi book "Hail Mary", sometimes it's hard being an American scientist.
