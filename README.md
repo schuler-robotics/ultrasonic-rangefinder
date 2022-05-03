@@ -1,8 +1,8 @@
 Ultrasonic Rangefinder
 ----------------------
-A trend in the development of electromechanical-software systems is to build prototypes from low cost digital microcontrollers instead of multiple single purpose integrated circuits.  This project shows by example how functionality of low cost microcontrollers may be increased, while development time, cost, and complexity reduced, by augmentaition with simple analog circuits.  The microcontroller in this design is a Raspberry Pi Pico, and the application is an ultrasonic distance rangefinder.
+Adding basic component level analog circuits to low cost digital microcontrollers reduces development time, cost, and complexity of electromechanical-software systems prototypes.  In this project, the Raspberry Pi Pico integrated resistors and PWM are used in a novel way to prototype an ultrasonic rangefinder transmitter and receiver.
 
-A second motivation is the author's desire to build a backyard-scale positioning system to control an autonomous lawn mower.  There are downsides to having your ~~mowers~~ children grow up and move out.
+A personal motivation for this work is a desire to build a backyard-scale positioning system for an antonymous lawn mower.  There are downsides to having your lawn mowing children grow up and move out.
 
 Figure (1) shows an analog inductive switcher (boost converter), minus the Pico for clocking, using just a transistor, diode, capacitor, and a hand wound inductor.
 
@@ -17,7 +17,7 @@ Figure (1) Analog Boost Converter
 
 System Description
 ------------------
-The system under consideration is an ultrasonic (40KHz) transmitter-receiver pair, configured to omnidirectionally measure distance.  The design has a working diameter greater than 32 ft (1), and sub-inch accuracy.
+The system under consideration is an ultrasonic (40KHz) transmitter-receiver pair, providing an omnidirectional distance measurement.  The design has working diameter greater than 32 ft(1), and sub-inch accuracy.
 
 Breadboard prototypes of the transmitter-receiver pair are illustrated in Figure (2), and a short demonstration video is linked to the image.
 
@@ -30,7 +30,7 @@ Figure (2) Ultrasonic Rangefinder Prototype; Click image for video demonstration
 
 The transmitter includes an inductive switcher, clocked by the Pico PWM (pulse width modulator), to generate 20V from a 5V battery.  The 20V source powers a level-shifter and high voltage driver, generating a 40V peak-to-peak pulse train.  The high voltage pulses are fed to parallel piezo transducers (speakers) coupled to a 3D printed reflector to spread the signal uniformly in all lateral directions.
 
-The output of the boost converter is determined by the PWM duty cycle and voltage clamped to 20V by the level-shifter transistors.  With a distance update rate of hundreds of milliseconds, the heat generated to power a 20 microsecond ultrasound pulse is insignificant.  A heat sink may be added to the switcher transistor to accommodate single digit millisecond distance update rates.  The inductor and capacitor values are selected to support the required output current and voltage ripple.  
+The converter output, determined by the PWM duty cycle and LC component selection, is voltage clamped to 20V by the level-shifter transistors.  With a distance update rate of hundreds of milliseconds, the heat generated to power a 20 microsecond ultrasound pulse is insignificant.  A heat sink may be added to the switcher transistor to accommodate single digit millisecond distance update rates.  The inductor and capacitor values are selected to support the required output current and voltage ripple.  
 
 The schematic and simulation results of the transmitter are shown in Figure (3). The resources inside the dashed lines represent the GPIO (general purpose input/output) signals, including pin models, that physically reside on the Pico microcontroller.
 
