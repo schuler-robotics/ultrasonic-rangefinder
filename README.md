@@ -110,9 +110,18 @@ schuler at usa.com
 </pre>
 
 <p float="left">
-<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-A-vangoh-20220503.jpg" width="800" />
+<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-20220505.jpg" width="350" />
+<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-A-20220505.jpg" width="350" />
 </p>
-This 3D printed robot lawn mower chasis is the eventual home for the ultrasonic rangefinder.
+An ultrasonic rangefinder receiver will sit atop this 3D printed robot lawn mower chasis.
+<br />
+<br />
+
+
+<p float="left">
+
+</p>
+
 <br />
 <br />
 
