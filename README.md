@@ -1,10 +1,8 @@
 Ultrasonic Rangefinder
 ----------------------
-Adding basic component level analog circuits to low cost digital microcontrollers reduces development time, cost, and complexity of electromechanical-software systems prototypes.  In this project, the Raspberry Pi Pico integrated resistors and PWM are used in a novel way to prototype an ultrasonic rangefinder transmitter and receiver.
+Adding basic component level analog circuits to low cost digital microcontrollers reduces development time, cost, and complexity of electromechanical-software prototypes.  In this project, the Raspberry Pi Pico integrated resistors and PWM are used in a novel way to prototype an ultrasonic rangefinder transmitter and receiver.  The goal is to achieve high functionality with minimal resources.  When combined with the Pico for clocking, the transistor, diode, capacitor, and hand wound inductor in Figure (1) generate voltage levels sufficient for ultrasound signaling.
 
-A personal motivation for this work is a desire to build a backyard-scale positioning system for an antonymous lawn mower.  There are downsides to having your lawn mowing children grow up and move out.
-
-Figure (1) shows an analog inductive switcher (boost converter), minus the Pico for clocking, using just a transistor, diode, capacitor, and a hand wound inductor.
+The target application for this project is a yard-scale positioning system for an autonomous lawn mower.  Typical autonomous mowers rely on RTK (real time kinetic) GPS, trained neural network vision systems, or random motion within a buried sense wire boundary.  RTK GPS receivers are expensive, and rely on RF error correction data from an external service.  RTK signal providers usually require a paid subscription, if available at all in the mowing location.  Neural network vision systems are complex to implement, and training data requires sufficiently static visual cues in the mowing area.  Random motion mowers are inefficient, with mowing time, and hence battery capacity, an exponential function of mowing area.  Positioning by time of flight ultrasonic measurement may provide a less complex and lower cost solution, while maintaining deterministic motion.
 
 
 <p float="left">
@@ -17,7 +15,7 @@ Figure (1) Analog Boost Converter
 
 System Description
 ------------------
-The system under consideration is an ultrasonic (40KHz) transmitter-receiver pair, providing an omnidirectional distance measurement.  The design has working diameter greater than 32 ft(1), and sub-inch accuracy.
+The system under consideration is an ultrasonic (40KHz) transmitter-receiver pair, providing an omnidirectional distance measurement.  The design has a working diameter greater than 32 ft(1), and sub-inch accuracy.
 
 Breadboard prototypes of the transmitter-receiver pair are illustrated in Figure (2), and a short demonstration video is linked to the image.
 
@@ -69,7 +67,7 @@ Figure (5) Transmit and Receive Pulses Timing at 1ft
 <br />
 <br />
 
-Another non-ideality which must be accounted for is clock frequency skew between the transmitter and receiver Picos.  Figure (6) shows an approximately constant skew of 18us per pulse between the transmitter and receivier clocks.  This skew depends on environmental factors, such as process variation of the Picos, battery voltage, and temperature.  Similar to the velocity calibration, this skew may be auto-compensated at startup by measuring the skew of successive pulses.
+Another non-ideality which must be accounted for is clock frequency skew between the transmitter and receiver Picos.  Figure (6) shows an approximately constant skew of 18us per pulse between the transmitter and receiver clocks.  This skew depends on environmental factors, such as process variation of the Picos, battery voltage, and temperature.  Similar to the velocity calibration, this skew may be auto-compensated at startup by measuring the skew of successive pulses.
 
 <p float="left">
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/fig06-tx01-rx04-timing-skew.jpg" width="500" />
@@ -113,7 +111,7 @@ schuler at usa.com
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-A-20220505.jpg" width="350" />
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-B-20220505.jpg" width="350" />
 </p>
-An ultrasonic rangefinder receiver will sit atop this 3D printed robot lawn mower chasis.
+An ultrasonic rangefinder receiver will sit atop this 3D printed robot lawn mower chassis.
 <br />
 <br />
 
