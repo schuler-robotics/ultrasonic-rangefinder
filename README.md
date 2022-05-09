@@ -1,5 +1,5 @@
-Ultrasonic Rangefinder
-----------------------
+Simple and Low Cost Ultrasonic Rangefinder
+------------------------------------------
 Adding basic component level analog circuits to low cost digital microcontrollers reduces development time, cost, and complexity of electromechanical-software prototypes.  In this project, the Raspberry Pi Pico integrated resistors and PWM are used in a novel way to prototype an ultrasonic rangefinder transmitter and receiver.  The goal is to achieve high functionality with minimal resources.  When combined with the Pico for clocking, the transistor, diode, capacitor, and hand wound inductor in Figure (1) generate voltage levels sufficient for ultrasound signaling.
 
 The target application for this project is a yard-scale positioning system for an autonomous lawn mower.  Typical autonomous mowers rely on RTK (real time kinetic) GPS, trained neural network vision systems, or random motion within a buried sense wire boundary.  RTK GPS receivers are expensive, and rely on RF error correction data from an external service.  RTK signal providers usually require a paid subscription, if available at all in the mowing location.  Neural network vision systems are complex to implement, and training data requires sufficiently static visual cues in the mowing area.  Random motion mowers are inefficient, with mowing time, and hence battery capacity, an exponential function of mowing area.  Positioning by time of flight ultrasonic measurement may provide a less complex and lower cost solution, while maintaining deterministic motion.
