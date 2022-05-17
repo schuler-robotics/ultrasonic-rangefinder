@@ -109,9 +109,9 @@ schuler at usa.com
 
 <p float="left">
 <img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-A-20220505.jpg" width="350" />
-<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-concept-B-20220505.jpg" width="350" />
+<img src="https://github.com/schuler-robotics/ultrasonic-rangefinder/blob/master/images/mower-01-photo-20220517.jpg" width="350" />
 </p>
-An ultrasonic rangefinder receiver will sit atop this 3D printed robot lawn mower chassis.
+An ultrasonic rangefinder receiver will sit atop this 3D printed robot lawn mower under development.  While I enjoy designing, building, and programming robots, I'm not a fan of mowing my lawn.
 <br />
 <br />
 
